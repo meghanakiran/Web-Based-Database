@@ -1,8 +1,8 @@
 <?php
-$servername = "cs.okstate.edu";
-$username = "mkiran";
-$password = "galena8antics4reveal";
-$dbname = "mkiran";
+$servername = "****";
+$username = "****";
+$password = "****";
+$dbname = "****";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -14,7 +14,7 @@ if (!$conn) {
 $select1 = $_POST['table'];
 
 // sql to create table
-$query ="SHOW TRIGGERS LIKE 'Meghana'";
+$query ="SHOW TRIGGERS LIKE 'yes'";
 $result = mysqli_query($conn,$query) or
 die('error querying database');
 
