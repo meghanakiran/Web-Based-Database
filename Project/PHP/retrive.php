@@ -1,5 +1,5 @@
 <?php 
-$con = mysqli_connect('cs.okstate.edu','mkiran', 'galena8antics4reveal','mkiran') or
+$con = mysqli_connect('******','******', '******','******') or
 die('error connecting to database');
 $query = 'SELECT * FROM Product'; 
 $result = mysqli_query($con, $query)or 
