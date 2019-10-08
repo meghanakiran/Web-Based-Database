@@ -1,6 +1,6 @@
 <?php 
   session_start();
-$con=mysqli_connect('cs.okstate.edu','mkiran','galena8antics4reveal','mkiran')
+$con=mysqli_connect('******','******', '******','******')
 or die('error connecting to database');  //connect to database 
 //$columnname= $_POST['ColumnName'];
 $select1 = 'paydetails';
