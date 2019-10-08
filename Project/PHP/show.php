@@ -1,8 +1,8 @@
 <?php 
-$servername = "cs.okstate.edu";
-$username = "mkiran";
-$password = "cs.okstate.edu";
-$dbname = "mkiran";
+$servername = "****";
+$username = "****";
+$password = "****";
+$dbname = "****";
 
 // Create connection 
 $conn = mysqli_connect($servername, $username, $password, $dbname); 
