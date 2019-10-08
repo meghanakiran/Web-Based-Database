@@ -1,8 +1,8 @@
 <?php
-$servername = "cs.okstate.edu";
-$username = "mkiran";
-$password = "galena8antics4reveal";
-$dbname = "mkiran";
+$servername = "****";
+$username = "****";
+$password = "****";
+$dbname = "****";
 
 $before="before";
 $after="after";
