@@ -3,7 +3,7 @@
 <body> 
  
 <?php
-echo "onrnm yes it worked!";
+echo " yes it worked!";
 ?> 
  
 </body>
