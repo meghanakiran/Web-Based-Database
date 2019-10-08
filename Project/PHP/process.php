@@ -10,7 +10,7 @@ $p_name=$_POST['p_name'];
 //Execute the query
  
   
-$con=mysqli_connect('cs.okstate.edu','mkiran', 'galena8antics4reveal','mkiran')
+$con=mysqli_connect('******','******', '******','******')
 or die('error connecting to database');  //connect to database 
 
 $query = "INSERT INTO Product(p_id,price,p_name)
