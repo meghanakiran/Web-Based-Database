@@ -26,7 +26,7 @@
 session_start();
 if(isset($_POST['submit']))
 {
- $con=mysqli_connect('cs.okstate.edu','mkiran','galena8antics4reveal','mkiran')
+ $con=mysqli_connect('******','******', '******','******')
 or die('error connecting to database');  //connect to database 
  $name=$_POST['name'];
  $pwd=$_POST['pwd'];
