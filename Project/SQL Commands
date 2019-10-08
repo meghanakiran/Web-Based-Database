@@ -1,1 +1,644 @@
+CREATE TABLE Customer(
+c_id int(11),
+c_name varchar(255),
+c_phone int,
+password varchar(255),
+order_id int(11),
+p_id int(11),
+cat_id int(11),
+PRIMARY KEY(c_id)
+);
+
+CREATE TABLE count1(
+count int(11)
+);
+INSERT INTO Customer(c_id,c_name,c_phone,password,order_id,p_id,cat_id)
+VALUES(4,'Karan',984502336,'s77yg',4001,211,2);
+
+
+CREATE TABLE paydetails(
+pay_id int(11),
+card_name varchar(255),
+card_no int(11),
+PRIMARY KEY(pay_id)
+);
+
+INSERT INTO paydetails(pay_id,card_name,card_no)
+VALUES(2,'meghana',45589676411);
+
+
+CREATE TABLE customer(
+c_id int(11),
+c_name varchar(255),
+c_phone int(11),
+password varchar(255),
+address varchar(255),
+order_id int(11),
+p_name varchar(255),
+price decimal(18,2),
+bill_total decimal(18,2),
+checkout_on date,
+type varchar(255),
+PRIMARY KEY(c_id)
+); 
+
+CREATE TABLE sales(
+sale_id int(11),
+sold_on date,
+p_name varchar(255),
+quantity int(11),
+PRIMARY KEY(sale_id)
+);
+
+
+INSERT INTO sales(sale_id,sold_on,p_name,quantity,price)
+VALUES(3,'2016-08-09','pizza',15,6.00);
+
+CREATE TABLE salesprofit(
+sale_id int(11),
+sold_on date,
+bill_total decimal(18,2),
+profit decimal(18,2),
+PRIMARY KEY(sale_id)
+);
+
+INSERT INTO salesprofit(sale_id,sold_on,bill_total,profit)
+VALUES(3,'2016-08-09',7.25,1.00);
+
+
+
+
+DROP TABLE Customer;
+ALTER TABLE Customer
+ADD c_addid varchar(255),
+ADD order_id int,
+ADD p_id int,
+ADD cat_id int;
+
+
+ALTER TABLE Customer
+ADD FOREIGN KEY (c_addid) 
+REFERENCES Address(c_addid);
+
+ALTER TABLE Customer
+ADD FOREIGN KEY (c_addid) REFERENCES Address(c_addid) ON DELETE CASCADE;
+
+ALTER TABLE Customer
+ADD FOREIGN KEY (order_id) REFERENCES Orderdetails(order_id),
+ADD FOREIGN KEY (p_id) REFERENCES Payment(p_id),
+ADD FOREIGN KEY (cat_id) REFERENCES Category(cat_id);
+
+INSERT INTO Customer(c_id,c_name,c_phone,password, order_id,p_id,cat_id)
+VALUES(4,'karan',454545321,'sgoatzzz',4001,211,02);
+
+INSERT INTO customer(c_id,c_name,c_phone,password,address,order_id,p_name,price,bill_total,checkout_on,type)
+VALUES(2,'Katrina',1234567890,'sgtyred','A6,1315 W',4003,'fries',12.00,12.00,'2016-08-09','pickup');
+
+INSERT INTO customer(c_id,c_name,c_phone,password,address,order_id,p_name,price,bill_total,checkout_on,type)
+VALUES(3,'Lauren',987657890,'sgoat','B12,1316 W',4002,'cheese fries',7.54,7.54,'2016-08-09','delievery');
+
+INSERT INTO customer(c_id,c_name,c_phone,password,address,order_id,p_name,price,bill_total,checkout_on,type)
+VALUES(4,'Karan',454545321,'sgoat22','A22,foxrun',4001,'pasta',7.25,7.25,'2016-08-09','delievery');
+
+INSERT INTO Customer(c_id,c_name,c_phone,password,c_addid,order_id,payment_id,cat_id)
+VALUES(2,'kavya',4025986545,'rattle',05,4004,201,02);
+c_addid,order_id,payment_id,cat_id
+
+INSERT INTO Customer1(c_id,c_name,c_phone,password)
+VALUES(1,'Ram',4059876545,'abcde');
+
+DELETE FROM Customer
+where c_id =1;
+
+DELETE FROM Orderdetails
+where order_id =4003;
+
+
+SELECT * from Customer
+where c_name ='kavya'
+
+UPDATE Customer 
+SET password='idontknow77' 
+WHERE password ='abcde';
+***************************************************************************************************
+
+
+CREATE TABLE Address
+(
+c_addid int,
+location varchar(255) NOT NULL,
+PRIMARY KEY (c_addid)
+);
+
+ALTER TABLE Address DROP INDEX(location);
+
+ALTER TABLE Address
+ADD FOREIGN KEY (location) REFERENCES Address1(location);
+
+INSERT INTO Address(c_addid,location)
+VALUES(01,'Stillwater');
+
+INSERT INTO Address(c_addid,location)
+VALUES(05,'OKC');
+
+
+DELETE FROM Address 
+where c_addid=01;
+***********************************************************************************************
+
+CREATE TABLE Address1
+(
+location varchar(255),
+zip int(6),
+PRIMARY KEY (location)
+);
+
+INSERT INTO Address1(location,zip)
+VALUES('Stillwater',74074);
+
+INSERT INTO Address1(location,zip)
+VALUES('OKC',74084);
+
+****************************************************************************************************
+
+CREATE TABLE Category
+(
+cat_id int,
+cat_name varchar(255),
+PRIMARY KEY (cat_id)
+);
+
+ALTER TABLE Category
+ADD p_id int;
+
+ALTER TABLE Category
+ADD FOREIGN KEY (p_id) REFERENCES Product(p_id);
+
+INSERT INTO Category(cat_id,cat_name,p_id)
+VALUES(04,'pasta',250);
+
+INSERT INTO Category(cat_id,cat_name,p_id)
+VALUES(08,'dessert',220);
+
+DELETE FROM Category
+where cat_id=03;
+
+
+*********************************************************************************************************
+
+CREATE TABLE Product
+(
+p_id int,
+price decimal(18,2),
+PRIMARY KEY (p_id)
+);
+
+CREATE TABLE Product
+(
+p_id int,
+price decimal(18,2),
+p_name varchar(255);
+PRIMARY KEY (p_id)
+);
+
+
+
+ALTER TABLE Product
+ADD p_name varchar(255);
+
+ALTER TABLE Product
+ADD FOREIGN KEY (p_name) REFERENCES Product1(p_name);
+
+INSERT INTO Product(p_id,p_name,price)
+VALUES(201,'thin crust pizza',12.00);
+
+INSERT INTO Product(p_id,p_name,price)
+VALUES(220,'dessert pizza',6.00);
+
+DELETE FROM Product
+where p_id='201';
+
+*********************************************************************************************
+CREATE TABLE Product1
+(
+p_name varchar(255),
+p_desc varchar(255),
+PRIMARY KEY (p_name)
+);
+INSERT INTO Product1(p_name,p_desc)
+VALUES('thin crust pizza','it is filled with veggie toppings');
+
+INSERT INTO Product1(p_name,p_desc)
+VALUES('dessert pizza','it is filled oreo with  toppings');
+
+
+******************************************************************************************
+
+CREATE TABLE Orderdetails
+(
+order_id int,
+checkout_on date,
+bill_total decimal(18,2),
+payment_id int,
+PRIMARY KEY (order_id)
+);
+
+
+CREATE TABLE Orderdetail1
+(
+order_id int,
+c_name varchar(255),
+p_name varchar(255),
+checkout_on date,
+bill_total decimal(18,2),
+PRIMARY KEY (order_id)
+);
+
+
+ALTER TABLE Orderdetails
+ADD FOREIGN KEY (payment_id) REFERENCES Payment(payment_id);
+
+
+
+INSERT INTO Orderdetails(order_id,checkout_on,bill_total)
+VALUES('4004','2016-08-09',7.54);
+
+INSERT INTO Orderdetail1(order_id,c_name,p_name,checkout_on,bill_total)
+VALUES('4001', 'Karan','pasta','2016-08-09',7.25);
+
+INSERT INTO Orderdetail1(order_id,c_name,p_name,checkout_on,bill_total)
+VALUES('4002', 'Lauren','cheese fries','2016-08-09',7.54);
+
+INSERT INTO Orderdetail1(order_id,c_name,p_name,checkout_on,bill_total)
+VALUES('4003', 'Katrina','fries','2016-08-09',12.00);
+
+
+
+DELETE FROM Orderdetails
+where order_id='4001';
+
+INSERT INTO Orderdetails(order_id,checkout_on,bill_total)
+VALUES('4001','2016-08-09',13.54);
+
+INSERT INTO Orderdetails(order_id,checkout_on,bill_total,payment_id)
+VALUES('4004','2016-08-09',21.50,301);
+
+
+***********************************************************************************************
+CREATE TABLE Payment
+(
+payment_id int,
+card_no int(16),
+PRIMARY KEY (payment_id)
+);
+
+ALTER TABLE Payment
+ADD FOREIGN KEY (card_no) REFERENCES Payment1(card_no);
+
+
+
+INSERT INTO Payment(payment_id)
+VALUES('3500');
+
+DELETE FROM Payment 
+where payment_id='3500';
+
+INSERT INTO Payment(payment_id,card_no)
+VALUES(300,350040);
+
+INSERT INTO Payment(payment_id,card_no)
+VALUES(301,640097);
+
+**************************************************************************************************
+CREATE TABLE Payment1
+(
+card_no int ,
+card_name varchar(255),
+cvv int(3) NOT NULL,
+expiry_d date,
+PRIMARY KEY (card_no)
+);
+
+INSERT INTO Payment1(card_no,card_name,cvv,expiry_d)
+VALUES(350040,'Ram Dutt',334,'2021-08-21');
+);
+
+INSERT INTO Payment1(card_no,card_name,cvv,expiry_d)
+VALUES(640097,'kavya',774,'2022-09-18');
+);
+DELETE FROM Payment1
+where card_name='Ram Dutt';
+
+DROP TABLE Payment1;
+
+****************************************************************************************************
+Create view billtotal AS select order_id,checkout_on,bill_total FROM Orderdetails WHERE bill_total > 2.00
+
+select * FROM $name
+
+
+Create view cp AS select cat_id,p_name,cat_name,price FROM Product,Category WHERE Category.p_id=Product.p_id
+
+
+
+Select cat_name,p_name,price FROM cp WHERE p_name = 'cheese fries';
+
+
+ALTER TABLE Orderdetails ADD $select int
+
+Select cat_name FROM Category WHERE p_id = (Select p_id FROM Product WHERE p_name ='cheese fries');
+.........................................................................................................
+Select c_name FROM Customer c WHERE c.order_id =
+(Select a.order_id,a.bill_total
+FROM Orderdetails a
+WHERE a.bill_total = (Select MAX(bill_total)
+FROM Orderdetails  
+WHERE order_id=a.order_id=c.order_id));
+
+
+
+
+CREATE TABLE c(
+ci int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name varchar(255)
+);
+INSERT INTO c(ci,name) VALUES(1,'kavya');
+
+INSERT INTO c(name) VALUES('kavya');
+
+CREATE TRIGGER cust
+BEFORE INSERT
+ON c FOR EACH ROW 
+SET NEW.name=UPPER(NEW.name);
+END;
+
+ CREATE TRIGGER cust
+    -> BEFORE INSERT
+    -> ON c FOR EACH ROW
+    -> SET NEW.name=UPPER(NEW.name);
+
+DROP TRIGGER cust;
+.....................................................................
+
+
+CREATE PROCEDURE 'customer'()
+BEGIN
+SELECT name FROM c;
+END;
+
+
+DELIMITER //
+
+CREATE PROCEDURE simpleproc (OUT param1 INT)
+ BEGIN
+  SELECT COUNT(*) INTO param1 FROM c;
+ END;
+//
+
+DELIMITER ;
+
+
+CALL simpleproc(@a);
+SELECT @a;
+
+DROP PROCEDURE simpleproc;
+
+.........................................................
+
+DELIMITER //
+
+CREATE PROCEDURE godletthiswork (OUT param1 INT, INOUT categoryname VARCHAR(255),IN categoryid INT)
+ BEGIN
+  SELECT cat_name INTO param1 FROM Category
+WHERE cat_id = categoryid
+IF categoryid = '3;
+THEN SET categoryname = 'apple'
+END IF;
+ END;
+//
+
+DELIMITER ;
+
+...................................
+DELIMITER //
+DROP PROCEDURE rs;
+CREATE PROCEDURE rs (IN num INT)
+BEGIN
+DECLARE x INT;
+SET x = 1;
+loop_label: LOOP
+INSERT INTO Salecategory (categoryname) VALUES('pizza');
+SET x = x + 1;
+IF x >= num 
+THEN
+LEAVE loop_label;
+END IF;
+END LOOP;
+END;
+//
+DELIMITER ;
+
+
+
+CREATE TABLE Salecategory
+(
+sc_id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+categoryname varchar(255)
+);
+..............................................
+
+CREATE TABLE c1(i INT);
+
+CREATE TABLE c2(i INT);
+
+CREATE TABLE c3(i INT);
+
+DELIMITER //
+
+CREATE PROCEDURE p1()
+BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE x, y INT;
+  DECLARE cur1 CURSOR FOR SELECT i FROM c1;
+  DECLARE cur2 CURSOR FOR SELECT i FROM c2;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur1;
+  OPEN cur2;
+
+  read_loop: LOOP
+    FETCH cur1 INTO x;
+    FETCH cur2 INTO y;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+    IF x < y THEN
+      INSERT INTO c3 VALUES (x);
+    ELSE
+      INSERT INTO c3 VALUES (y);
+    END IF;
+  END LOOP;
+
+  CLOSE cur1;
+  CLOSE cur2;
+END; //
+
+DELIMITER ;
+
+INSERT INTO c1 VALUES(5),(50),(500);
+
+INSERT INTO c2 VALUES(10),(20),(30);
+
+CALL p1();
+
+SELECT * FROM c3;
+......................................................*******************************
+
+CREATE TABLE c1(
+i_d INT,
+z date
+);
+
+CREATE TABLE c2(i INT);
+
+CREATE TABLE c3(i INT);
+
+DELIMITER //
+
+CREATE PROCEDURE p1( )
+BEGIN
+  DECLARE x, y INT;
+  SET y = 5;
+  DECLARE cur1 CURSOR FOR SELECT i_d FROM c1;
+  OPEN cur1;
+  
+  read_loop: LOOP
+    FETCH cur1 INTO x;
+    
+   
+    IF x < y THEN
+      INSERT INTO c2(i) VALUES (x);
+    ELSE
+      INSERT INTO c3(i) VALUES (x);
+    END IF;
+  END LOOP;
+
+  CLOSE cur1;
+END; 
+  //
+
+DELIMITER ;
+
+
+
+
+INSERT INTO c1(i,z)
+VALUES('50','2016-08-09');
+
+
+INSERT INTO c2 VALUES(10),(20),(30);
+
+CALL p1;
+
+SELECT * FROM c3;
+
+
++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE Productprice (INOUT booking_list varchar(400))
+ BEGIN  
+ DECLARE b_finished INTEGER DEFAULT 0; 
+ DECLARE b_book varchar(100) DEFAULT ''; 
+ 
+ DECLARE product_price CURSOR FOR  SELECT p_id from Product; 
+  DECLARE CONTINUE HANDLER  FOR NOT FOUND SET b_finished=1; 
+  OPEN product_price; 
+  get_booking : LOOP 
+   FETCH Booking_Cursor INTO b_book; 
+    IF b_finished =1 THEN  LEAVE get_booking; 
+    END IF; 
+    SET booking_list = CONCAT(b_book,';',booking_list); 
+    END LOOP get_booking; 
+    CLOSE product_price; 
+    END;
+    //
+
+DELIMITER ;
+
+
+
+
+DECLARE cat_cursor CURSOR FOR
+      (SELECT   cat_id,
+      FROM     Category) ;WHERE cat_id <= '08'
+      ORDER BY cat_name,
+    FOR UPDATE OF cat_name;
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE my_procedure_cursors(INOUT return_val INT)
+BEGIN
+DECLARE a INTEGER; 
+DECLARE b INTEGER DEFAULT 0;
+DECLARE cur_1 CURSOR FOR 
+SELECT order_id FROM Orderdetails;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+OPEN cur_1;
+h : LOOP
+FETCH cur_1 INTO a;
+IF b = 1 THEN LEAVE h;
+END IF;
+SET return_val = a;
+END LOOP;
+CLOSE cur_1;
+END;
+//
+DELIMITER;
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE my_procedure_cursors(INOUT return_val INT)
+     BEGIN
+     DECLARE a INTEGER;
+     DECLARE b INTEGER DEFAULT 0;
+     DECLARE cur_1 CURSOR FOR
+     SELECT order_id FROM Orderdetails;
+     DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+     OPEN cur_1;
+     h : LOOP
+     FETCH cur_1 INTO a;
+     IF b = 1 THEN LEAVE h;
+     END IF;
+     SET return_val = a;
+     END LOOP;
+     CLOSE cur_1;
+     END;
+//
+DELIMITER ;
+
+
+
+CREATE INDEX P ON c(ci);
+drop INDEX p ON c;
+
 
